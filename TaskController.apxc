@@ -1,0 +1,28 @@
+public class TaskController {
+    
+    public String answer{get;set;}
+    public String question{get;set;}
+    public String recomedations{get;set;}
+    public String accLink{get;set;}
+    public String accName{get;set;}
+    public Boolean displayPopup {get;set;}
+ 
+    public void getQuest(){
+      question = TaskHelper.getQuestion();
+    }
+    
+    public void sendAnsw(){
+      String response = TaskHelper.sendAnswer(answer);
+      String typeRequest = response.substring(0,5);
+        if (typeRequest == 'https') {
+            accLink = response;
+            accName = 'Новый контакт успешно создан. Нажмите здесь для просмотра контакта!';
+        } else { 
+        	recomedations = response;  
+        	displayPopup = true;    
+          }
+    }
+    
+    public void closePopup() {
+        displayPopup = false;
+    }

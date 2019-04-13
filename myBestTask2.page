@@ -1,0 +1,86 @@
+<apex:page controller="TaskController" standardStylesheets="false">
+    <apex:slds />
+    <div class="slds-scope">
+      
+    	<apex:form style="text-align: center; margin-top:20px;">
+        	<apex:commandLink style="font-size:18px;" 
+                              action="{!getQuest}" 
+                              value="Нажмите здесь для получения вопроса!" 
+                              id="theCommandLink"/> <br/>
+        	<p class = "slds-m-top_x-large"></p>
+            <label class="slds-form-element__label" 
+                   for="quest" 
+                   style=" font-size:18px;">
+                   Вопрос:
+            </label>
+            <div class="slds-form-element__control">
+             	<span id = "quest" style="padding-top:15px; font-size:18px;">
+                {!question}
+            	</span> <br/>   
+            </div>
+            <p class = "slds-m-top_x-large"></p>
+            <label class="slds-form-element__label" 
+                   for="quest" 
+                   style=" font-size:14px;">
+                   Введите ответ
+            </label>
+            <div class="slds-form-element__control">
+            	<apex:inputText value="{!answer}" 
+                           	 	style="margin-top:15px; " 
+                           	 	styleClass="slds-input slds-size--1-of-5 slds-m-top_x-large"
+                           	 	id="inputArea" />  <br/>
+            </div>
+        	<apex:commandButton styleClass="slds-m-top_x-large slds-m-bottom_x-large slds-button slds-button_brand"
+                                action="{!sendAnsw}" 
+                                value="Submit"/> <br/>
+            <apex:outputLink value="{!accLink}" 
+                             style="margin-top:15px; font-size:16px;">
+                			 {!accName}
+            </apex:outputLink>
+            
+        <!-- Create popUP with recomendations-->
+            <apex:outputPanel id="popup">
+                <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup" rendered="{!displayPopUp}">
+                     <apex:commandButton value="X" 
+                                         title="Close the popup" 
+                                         action="{!closePopup}" 
+                                         styleClass="closeButton slds-button slds-button_brand" 
+                                         rerender="popup">
+                     </apex:commandButton>
+                            <p style = "margin-top:100px;"></p>               
+                    		<span style = "font-size:18px;">{!recomedations}</span> <br/>
+                    		<span style = "font-size:18px;">Попробуй ответить еще раз!</span>
+                    		<p style = "margin-top:50px;"></p>
+                     <apex:commandButton value="Ok" 
+                                         action="{!closePopup}" 
+                                         styleClass="ButtonOk slds-button slds-button_brand slds-p-horizontal_xx-large" 
+                                         rerender="popup">
+                     </apex:commandButton>
+                </apex:outputPanel>
+            </apex:outputPanel>
+
+ <style type="text/css">
+.customPopup {
+    background-color: white;
+    border-color:#0070d3;
+    border-style: solid;
+    border-width: 2px;
+    border-radius:5px;
+    left: 30%;
+    padding: 10px;
+    position: absolute;
+    z-index: 9999;
+    width: 40%;
+    height:300px;
+    top: 10%;
+}
+
+.closeButton {
+    float:right;
+}
+</style>
+
+		</apex:form>
+	 </div>
+    
+</apex:page>

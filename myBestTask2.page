@@ -1,0 +1,38 @@
+<apex:page controller="TaskController" standardStylesheets="false">
+    
+    <apex:stylesheet value="{!URLFOR($Resource.popupStyle, 'popup2.css')}"/>
+    <apex:slds />
+    
+    <div class="slds-scope">
+    	<apex:form style="text-align:center; margin-top:20px;" id="form1">
+        	<apex:commandLink style="font-size:18px;" action="{!getQuest}" value="Нажмите здесь для получения вопроса!" reRender="form1"/>
+            <p class="slds-m-top_x-large"/>
+            <label class="slds-form-element__label" style="font-size:18px;">Вопрос:</label>
+            <div class="slds-form-element__control">
+            	<span style="padding-top:15px; font-size:18px;">{!question}</span>   
+            </div>
+            <p class="slds-m-top_x-large"/>
+            <label class="slds-form-element__label" for="inputArea" style="font-size:14px;">Введите ответ</label>
+            <div class="slds-form-element__control">
+            	<apex:inputText value="{!answer}" style="margin-top:15px;" styleClass="slds-input slds-size--1-of-5 slds-m-top_x-large" id="inputArea"/>
+            </div>
+        	<apex:commandButton styleClass="slds-m-top_x-large slds-m-bottom_x-large slds-button slds-button_brand"
+            	action="{!sendAnsw}" value="Submit" reRender="popup, output"/> <br/>
+            <apex:outputLink value="{!accLink}" style="margin-top:15px; font-size:16px;" id="output">{!accName}</apex:outputLink>
+            
+ 			<!-- Create popUP with recomendations-->
+            <apex:outputPanel id="popup">
+                <apex:outputPanel id="popInnerOutputPnl" styleClass="customPopup" rendered="{!displayPopUp}">
+                    <apex:commandButton value="X" title="Close the popup" action="{!closePopup}" rerender="popup"
+                    	styleClass="closeButton slds-button slds-button_brand"/>
+                    <p style="margin-top:100px;"/>               
+                    <span style="font-size:18px;">{!recomedations}</span>
+                    <p style="margin-top:50px;"/>
+                    <apex:commandButton value="Ok" action="{!closePopup}" rerender="popup" 
+                    	styleClass="slds-button slds-button_brand slds-p-horizontal_xx-large" />
+                </apex:outputPanel>
+            </apex:outputPanel>
+            
+		</apex:form>
+	</div>
+</apex:page>
